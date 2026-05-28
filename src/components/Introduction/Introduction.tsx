@@ -1,6 +1,9 @@
 export const Introduction = () => {
   return (
-    <section className="min-h-screen text-white flex flex-col justify-center px-4 py-8 sm:px-6 lg:px-0">
+    <section
+      id="home"
+      className="min-h-screen text-white flex flex-col justify-center px-4 py-8 sm:px-6 lg:px-0"
+    >
       <div className="w-full max-w-7xl mx-auto mb-18 flex justify-center">
         <p className="text-xl sm:text-2xl">
           Hello! I Am{' '}
