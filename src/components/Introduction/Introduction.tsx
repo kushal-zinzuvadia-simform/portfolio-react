@@ -2,9 +2,9 @@ export const Introduction = () => {
   return (
     <section
       id="home"
-      className="min-h-screen text-white flex flex-col justify-center px-4 py-8 sm:px-6 lg:px-0"
+      className="min-h-screen text-white flex flex-col justify-center px-4 pb-8 sm:px-6 lg:px-0"
     >
-      <div className="w-full max-w-7xl mx-auto mb-18 flex justify-center">
+      <div className="w-full pt-8 max-w-7xl mx-auto mb-18 flex justify-center">
         <p className="text-xl sm:text-2xl">
           Hello! I Am{' '}
           <span className="text-purple-500 font-medium tracking-wide">
