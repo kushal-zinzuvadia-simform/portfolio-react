@@ -23,7 +23,7 @@ export const Projects = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projectData.map((project) => {
-            return <ProjectItem info={project} />;
+            return <ProjectItem key={project.id} info={project} />;
           })}
         </div>
       </div>
