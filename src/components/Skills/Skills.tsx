@@ -12,7 +12,7 @@ export const Skills = () => {
         <p className="font-mono">Weapons of Warfare</p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 w-full p-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 w-full p-10">
         {skills.map((skill) => (
           <SkillItem key={skill.id} index={skill.id} />
         ))}

@@ -1,13 +1,29 @@
+import { useState } from 'react';
+
 export const SkillItem = ({ index }: { index: number }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const isTouchDevice =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(hover: none)').matches;
+
   return (
-    <div className="group perspective-[1000px] flex items-center justify-center">
+    <button
+      type="button"
+      onClick={() => {
+        if (isTouchDevice) {
+          setIsFlipped((prev) => !prev);
+        }
+      }}
+      className="group perspective-[1000px] flex items-center justify-center"
+    >
       <div
-        className="
-          relative w-40 h-40
-          transition-transform duration-700
-          transform-3d
+        className={`
+          relative h-40 w-40
+          transform-3d transition-transform duration-700
           group-hover:transform-[rotateY(180deg)]
-        "
+          ${isFlipped ? 'transform-[rotateY(180deg)]' : ''}
+        `}
       >
         {/* FRONT */}
         <div
@@ -38,10 +54,10 @@ export const SkillItem = ({ index }: { index: number }) => {
           <img
             src={`/skill/${index}.svg`}
             alt="Skill"
-            className="w-25 h-25 object-contain"
+            className="h-25 w-25 object-contain p-1"
           />
         </div>
       </div>
-    </div>
+    </button>
   );
 };
