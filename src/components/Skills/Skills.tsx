@@ -1,3 +1,4 @@
+import { skills } from '../../data/skillData';
 import { SkillItem } from './SkillItem';
 
 export const Skills = () => {
@@ -12,14 +13,9 @@ export const Skills = () => {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 w-full p-10">
-        <SkillItem index={1} />
-        <SkillItem index={2} />
-        <SkillItem index={3} />
-        <SkillItem index={4} />
-        <SkillItem index={5} />
-        <SkillItem index={6} />
-        <SkillItem index={7} />
-        <SkillItem index={8} />
+        {skills.map((skill) => (
+          <SkillItem key={skill.id} index={skill.id} />
+        ))}
       </div>
     </section>
   );

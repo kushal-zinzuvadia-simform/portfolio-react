@@ -1,13 +1,11 @@
 type ProjectItemProps = {
-  info: infoType;
-};
-
-type infoType = {
-  title: string;
-  description: string;
-  imgUrl: string;
-  github: string;
-  preview: string;
+  info: {
+    title: string;
+    description: string;
+    imgUrl: string;
+    github: string;
+    preview: string;
+  };
 };
 
 export const ProjectItem = ({ info }: ProjectItemProps) => {

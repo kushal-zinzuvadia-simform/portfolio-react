@@ -6,7 +6,7 @@ export const Introduction = () => {
     >
       <div className="w-full pt-8 max-w-7xl mx-auto mb-18 flex justify-center">
         <p className="text-xl sm:text-2xl">
-          Hello! I Am{' '}
+          Hello! I am&nbsp;
           <span className="text-purple-500 font-medium tracking-wide">
             Kushal Zinzuvadia
           </span>
@@ -36,7 +36,7 @@ export const Introduction = () => {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-tight">
             Loves solving
             <br />
-            problems with{' '}
+            problems with&nbsp;
             <span className="text-purple-500 relative inline-block">
               code
               <span className="absolute p-4 left-0 top-0.5 w-full h-full border border-purple-400 rounded-full scale-110" />
