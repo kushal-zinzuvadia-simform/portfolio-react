@@ -1,17 +1,23 @@
 type NavItemProps = {
   label: string;
   className?: string;
+  onClick?: () => void;
 };
 
-export const NavItem = ({ label, className = '' }: NavItemProps) => {
+export const NavItem = ({ label, className = '', onClick }: NavItemProps) => {
   const handleClick = () => {
-    const section = document.getElementById(label.toLowerCase());
+    onClick?.();
 
-    if (section) {
-      section.scrollIntoView({
-        behavior: 'smooth',
-      });
-    }
+    setTimeout(() => {
+      const section = document.getElementById(label.toLowerCase());
+
+      if (section) {
+        section.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+    }, 300);
   };
 
   return (

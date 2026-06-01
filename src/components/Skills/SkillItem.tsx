@@ -4,8 +4,7 @@ export const SkillItem = ({ index }: { index: number }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const isTouchDevice =
-    typeof window !== 'undefined' &&
-    window.matchMedia('(hover: none)').matches;
+    typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches;
 
   return (
     <button

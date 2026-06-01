@@ -8,9 +8,10 @@ export const NavBar = () => {
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-[#1A0B2E] shadow-md">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-4 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between w-full gap-4 lg:w-auto">
-          <div className="text-2xl font-bold text-white tracking-wide">KZ</div>
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8 lg:px-12">
+        <div className="flex items-center justify-between w-full lg:w-auto">
+          <div className="text-2xl font-bold tracking-wide text-white">KZ</div>
+
           <button
             type="button"
             onClick={() => setIsOpen((prev) => !prev)}
@@ -32,18 +33,22 @@ export const NavBar = () => {
             <NavItem key={link} label={link} />
           ))}
         </div>
+      </div>
 
-        <div
-          className={`w-full overflow-hidden transition-all duration-300 md:hidden ${
-            isOpen ? 'max-h-64' : 'max-h-0'
-          }`}
-        >
+      {/* Mobile Menu */}
+      <div
+        className={`overflow-hidden transition-all duration-300 md:hidden ${
+          isOpen ? 'max-h-64' : 'max-h-0'
+        }`}
+      >
+        <div className="mx-auto max-w-7xl px-6 pb-4 sm:px-8 lg:px-12">
           <div className="flex flex-col gap-3 rounded-3xl border border-white/10 bg-[#1A0B2E]/95 p-4">
             {navLinks.map((link) => (
               <NavItem
                 key={link}
                 label={link}
-                className="w-full text-left bg-white/5 hover:bg-white/10"
+                className="w-full bg-white/5 text-left hover:bg-white/10"
+                onClick={() => setIsOpen(false)}
               />
             ))}
           </div>
