@@ -34,7 +34,7 @@ export const SkillItem = ({ index }: { index: number }) => {
           "
         >
           <img
-            src={`/weapons/${index}.svg`}
+            src={`/assets/weapons/${index}.svg`}
             alt="Weapon"
             className="w-30 h-30 object-contain"
           />
@@ -51,7 +51,7 @@ export const SkillItem = ({ index }: { index: number }) => {
           "
         >
           <img
-            src={`/skill/${index}.svg`}
+            src={`/assets/skill/${index}.svg`}
             alt="Skill"
             className="h-25 w-25 object-contain p-1"
           />

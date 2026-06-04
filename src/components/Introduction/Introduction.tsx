@@ -21,7 +21,7 @@ export const Introduction = () => {
           <div className="absolute w-70 h-72 bg-purple-700/40 blur-3xl rounded-full sm:w-85 sm:h-80" />
 
           <img
-            src="/engineer.png"
+            src="/assets/engineer.png"
             alt="Engineer"
             className="relative z-10 w-64 sm:w-72 md:w-80 lg:w-105"
           />
