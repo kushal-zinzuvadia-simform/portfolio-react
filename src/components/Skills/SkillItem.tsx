@@ -14,13 +14,22 @@ export const SkillItem = ({ index }: { index: number }) => {
           setIsFlipped((prev) => !prev);
         }
       }}
-      className="group perspective-[1000px] flex items-center justify-center"
+      className="
+        group
+        perspective-[1000px]
+        flex items-center justify-center
+        focus:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-purple-500
+        focus-visible:ring-offset-2
+      "
     >
       <div
         className={`
           relative h-40 w-40
           transform-3d transition-transform duration-700
           group-hover:transform-[rotateY(180deg)]
+          group-focus-visible:transform-[rotateY(180deg)]
           ${isFlipped ? 'transform-[rotateY(180deg)]' : ''}
         `}
       >
