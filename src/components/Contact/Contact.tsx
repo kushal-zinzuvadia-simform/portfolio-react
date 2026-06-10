@@ -18,32 +18,45 @@ export const Contact = () => {
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
 
+  const validateField = (name: keyof FormData, value: string) => {
+    switch (name) {
+      case 'name':
+        return value.trim() ? '' : 'Name is required';
+
+      case 'email':
+        if (!value.trim()) return 'Email is required';
+
+        return /^[A-Z0-9._%+-]+@[A-Z0-9]([A-Z0-9-]*[A-Z0-9])?(\.[A-Z0-9]([A-Z0-9-]*[A-Z0-9])?)*\.[A-Z]{2,}$/i.test(
+          value
+        )
+          ? ''
+          : 'Enter a valid email';
+
+      case 'contactNo':
+        if (!value.trim()) return 'Contact number is required';
+
+        return /^\d{10}$/.test(value)
+          ? ''
+          : 'Contact number must be exactly 10 digits';
+
+      case 'message':
+        return value.trim() ? '' : 'I would love to hear from you.';
+
+      default:
+        return '';
+    }
+  };
+
   const validate = () => {
     const newErrors: Partial<FormData> = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
+    (Object.keys(formData) as Array<keyof FormData>).forEach((field) => {
+      const error = validateField(field, formData[field]);
 
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9]([A-Z0-9-]*[A-Z0-9])?(\.[A-Z0-9]([A-Z0-9-]*[A-Z0-9])?)*\.[A-Z]{2,}$/i.test(
-        formData.email
-      )
-    ) {
-      newErrors.email = 'Enter a valid email';
-    }
-
-    if (!formData.contactNo.trim()) {
-      newErrors.contactNo = 'Contact number is required';
-    } else if (!/^\d{10}$/.test(formData.contactNo)) {
-      newErrors.contactNo = 'Contact number must be exactly 10 digits';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'I would love to hear from you.';
-    }
+      if (error) {
+        newErrors[field] = error;
+      }
+    });
 
     setErrors(newErrors);
 
@@ -58,6 +71,13 @@ export const Contact = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+    }));
+
+    const error = validateField(name as keyof FormData, value);
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: error || undefined,
     }));
   };
 
