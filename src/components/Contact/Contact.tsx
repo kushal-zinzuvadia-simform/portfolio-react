@@ -107,6 +107,7 @@ export const Contact = () => {
                 <input
                   type="text"
                   name="name"
+                  title="name"
                   placeholder="Your Name"
                   value={formData.name}
                   onChange={handleChange}
@@ -122,6 +123,7 @@ export const Contact = () => {
                 <input
                   type="email"
                   name="email"
+                  title="email"
                   placeholder="Your Email"
                   value={formData.email}
                   onChange={handleChange}
@@ -135,12 +137,18 @@ export const Contact = () => {
 
               <div>
                 <input
-                  type="tel"
+                  type="number"
                   name="contactNo"
+                  title="contactNo"
                   placeholder="Contact Number"
                   value={formData.contactNo}
-                  onChange={handleChange}
                   maxLength={10}
+                  onChange={handleChange}
+                  onKeyDown={(e) => {
+                    if (['e', 'E', '+', '-'].includes(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
                   className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 outline-none focus:border-purple-500"
                 />
 
@@ -154,7 +162,9 @@ export const Contact = () => {
               <div>
                 <textarea
                   name="message"
+                  title="message"
                   rows={5}
+                  maxLength={200}
                   placeholder="How can I help?"
                   value={formData.message}
                   onChange={handleChange}
