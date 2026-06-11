@@ -1,110 +1,8 @@
-import { useState } from 'react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-type FormData = {
-  name: string;
-  email: string;
-  contactNo: string;
-  message: string;
-};
-
-type FormErrors = Partial<Record<keyof FormData, string>>;
+import { useContactForm } from '../../hooks/useContactForm';
+import { ContactSocialLinks } from './ContactSocialLinks';
 
 export const Contact = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    contactNo: '',
-    message: '',
-  });
-
-  const [errors, setErrors] = useState<FormErrors>({});
-
-  const validateField = (name: keyof FormData, value: string) => {
-    switch (name) {
-      case 'name':
-        if (!value.trim()) return 'Name is required';
-
-        if (value.length > 30) return 'Name cannot exceed 30 characters';
-
-        return /^[A-Za-z\s]+$/.test(value)
-          ? ''
-          : 'Name can contain only alphabets and spaces';
-
-      case 'email':
-        if (!value.trim()) return 'Email is required';
-
-        return EMAIL_REGEX.test(value) ? '' : 'Enter a valid email';
-
-      case 'contactNo':
-        if (!value.trim()) return 'Contact number is required';
-
-        return /^\d{10}$/.test(value)
-          ? ''
-          : 'Contact number must be exactly 10 digits';
-
-      case 'message':
-        return value.trim() ? '' : 'I would love to hear from you.';
-
-      default:
-        return '';
-    }
-  };
-
-  const validate = () => {
-    const newErrors: Partial<FormData> = {};
-
-    (Object.keys(formData) as Array<keyof FormData>).forEach((field) => {
-      const error = validateField(field, formData[field]);
-
-      if (error) {
-        newErrors[field] = error;
-      }
-    });
-
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    const error = validateField(name as keyof FormData, value);
-
-    setErrors((prev) => ({
-      ...prev,
-      [name]: error || undefined,
-    }));
-  };
-
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!validate()) return;
-
-    console.log('Contact Form Data:', formData);
-
-    alert('Thank you for reaching out! I will get back to you soon.');
-
-    setFormData({
-      name: '',
-      email: '',
-      contactNo: '',
-      message: '',
-    });
-
-    setErrors({});
-  };
+  const { formData, errors, handleChange, handleSubmit } = useContactForm();
 
   return (
     <section
@@ -210,36 +108,7 @@ export const Contact = () => {
           </div>
 
           {/* Social Links */}
-          <div className="flex flex-col justify-center">
-            <h3 className="text-2xl font-medium mb-4">Connect with Me</h3>
-
-            <p className="text-gray-400 mb-8 max-w-md">
-              You can also find me on these platforms. Feel free to connect,
-              collaborate, or follow my work.
-            </p>
-
-            <div className="space-y-4">
-              <a
-                href="https://github.com/kushal-zinzuvadia-simform"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-4 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 transition hover:border-purple-500"
-              >
-                <FaGithub size={24} />
-                <span>GitHub/kushal-zinzuvadia-simform</span>
-              </a>
-
-              <a
-                href="https://in.linkedin.com/in/kushal-zinzuvadia"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-4 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 transition hover:border-purple-500"
-              >
-                <FaLinkedin size={24} />
-                <span>LinkedIn/kushal-zinzuvadia</span>
-              </a>
-            </div>
-          </div>
+          <ContactSocialLinks />
         </div>
       </div>
     </section>
