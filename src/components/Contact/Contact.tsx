@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 type FormData = {
   name: string;
   email: string;
   contactNo: string;
   message: string;
 };
+
+type FormErrors = Partial<Record<keyof FormData, string>>;
 
 export const Contact = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -16,21 +20,23 @@ export const Contact = () => {
     message: '',
   });
 
-  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
 
   const validateField = (name: keyof FormData, value: string) => {
     switch (name) {
       case 'name':
-        return value.trim() ? '' : 'Name is required';
+        if (!value.trim()) return 'Name is required';
+
+        if (value.length > 30) return 'Name cannot exceed 30 characters';
+
+        return /^[A-Za-z\s]+$/.test(value)
+          ? ''
+          : 'Name can contain only alphabets and spaces';
 
       case 'email':
         if (!value.trim()) return 'Email is required';
 
-        return /^[A-Z0-9._%+-]+@[A-Z0-9]([A-Z0-9-]*[A-Z0-9])?(\.[A-Z0-9]([A-Z0-9-]*[A-Z0-9])?)*\.[A-Z]{2,}$/i.test(
-          value
-        )
-          ? ''
-          : 'Enter a valid email';
+        return EMAIL_REGEX.test(value) ? '' : 'Enter a valid email';
 
       case 'contactNo':
         if (!value.trim()) return 'Contact number is required';
@@ -128,6 +134,7 @@ export const Contact = () => {
                   type="text"
                   name="name"
                   title="name"
+                  maxLength={30}
                   placeholder="Your Name"
                   value={formData.name}
                   onChange={handleChange}
@@ -157,18 +164,15 @@ export const Contact = () => {
 
               <div>
                 <input
-                  type="number"
+                  type="tel"
                   name="contactNo"
                   title="contactNo"
                   placeholder="Contact Number"
                   value={formData.contactNo}
-                  maxLength={10}
                   onChange={handleChange}
-                  onKeyDown={(e) => {
-                    if (['e', 'E', '+', '-'].includes(e.key)) {
-                      e.preventDefault();
-                    }
-                  }}
+                  maxLength={10}
+                  pattern="[0-9]{10}"
+                  inputMode="numeric"
                   className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 outline-none focus:border-purple-500"
                 />
 
