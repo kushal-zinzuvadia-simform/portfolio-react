@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { NavItem } from './NavItem';
 
 const navLinks = ['Home', 'Skills', 'Projects', 'Contact'];
